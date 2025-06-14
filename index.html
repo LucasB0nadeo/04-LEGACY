@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard - Produtor+</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai/dist/index.iife.js"></script>
+</head>
+<body>
+  <aside class="sidebar" role="navigation" aria-label="Menu de navegação">
+    <h1>Produtor+</h1>
+    <button class="nav-btn active" data-page="dashboard" aria-current="page">Dashboard</button>
+    <button class="nav-btn" data-page="register-product">Cadastrar Produto</button>
+    <button class="nav-btn" data-page="lovable">Criar Comercial</button>
+    <button class="nav-btn" data-page="tips">Dicas</button>
+    <button class="nav-btn" data-page="weather">Clima</button>
+    <button class="nav-btn" data-page="events">Feiras</button>
+    <button class="nav-btn" data-page="notes">Notas</button>
+  </aside>
+
+  <main>
+    <section id="dashboard" class="page active" aria-label="Seus Produtos Cadastrados">
+      <h2>Seus Produtos Cadastrados</h2>
+      <div class="products-grid" aria-live="polite" aria-relevant="additions removals"></div>
+    </section>
+
+    <section id="register-product" class="page" aria-label="Cadastrar Novo Produto">
+        <h2>Cadastrar Novo Produto</h2>
+        <form id="product-form" aria-label="Formulário para cadastrar novo produto">
+            <div class="full-row">
+              <label for="name">Nome do Produto</label>
+              <input type="text" id="name" name="name" placeholder="Ex: Tomate Cereja Orgânico" required />
+            </div>
+            <div class="half-row">
+              <div>
+                <label for="price">Preço (R$)</label>
+                <input type="number" id="price" name="price" min="0" step="0.01" placeholder="Ex: 8.00" required />
+              </div>
+              <div>
+                <label for="quantity">Quantidade</label>
+                <input type="number" id="quantity" name="quantity" min="1" placeholder="Ex: 50" required />
+              </div>
+            </div>
+            <div class="half-row">
+              <div>
+                <label for="unit">Unidade</label>
+                <input type="text" id="unit" name="unit" placeholder="Ex: bandeja, kg" required />
+              </div>
+              <div>
+                <label for="phone">Telefone (WhatsApp)</label>
+                <input type="tel" id="phone" name="phone" placeholder="Ex: 11999999999" pattern="[0-9]{10,11}" required />
+              </div>
+            </div>
+            <div class="full-row">
+              <label for="location">Localização</label>
+              <input type="text" id="location" name="location" placeholder="Ex: Santa Maria - RS" required />
+            </div>
+            <div class="full-row">
+              <label for="farmer">Nome do Produtor</label>
+              <input type="text" id="farmer" name="farmer" placeholder="Ex: Maria da Horta" required />
+            </div>
+            <div class="full-row">
+              <label for="description">Descrição (opcional)</label>
+              <textarea id="description" name="description" placeholder="Descrição detalhada do produto"></textarea>
+            </div>
+            <div class="full-row">
+              <label for="image">Imagem do Produto</label>
+              <input type="file" id="image" name="image" accept="image/*" />
+              <div id="image-preview" style="margin-top: 10px;"></div>
+            </div>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+    </section>
+
+    <section id="lovable" class="page" aria-label="Gerar Comercial com IA">
+      <h2>Gerar Comercial com IA</h2>
+      <p>Envie uma imagem do seu produto para gerar um roteiro de vídeo comercial automático com IA.</p>
+      <input type="file" id="lovable-image" accept="image/*" aria-label="Imagem do produto para comercial" />
+      <button class="btn btn-primary" id="generate-commercial-btn">Gerar Comercial</button>
+      <div id="lovable-loading" class="loading-spinner" style="display: none;"></div>
+      <div id="lovable-result" class="result-box" aria-live="polite" style="margin-top:1.5rem;"></div>
+    </section>
+
+    <section id="tips" class="page" aria-label="Dicas para o Pequeno Produtor">
+      <h2>Dicas para o Pequeno Produtor</h2>
+      <div class="tips-grid">
+        <div class="tip-card">
+          <img src="images/rotacao.jpg" alt="Plantação com rotação de culturas">
+          <div class="tip-card-content">
+            <h4>Rotação de Culturas</h4>
+            <p>Alternar as espécies de plantas cultivadas em uma mesma área ajuda a preservar os nutrientes do solo.</p>
+          </div>
+        </div>
+        <div class="tip-card">
+          <img src="images/adubacao.jpg" alt="Composteira com adubo orgânico">
+          <div class="tip-card-content">
+            <h4>Adubação Orgânica</h4>
+            <p>Utilize compostagem para enriquecer o solo com matéria orgânica, melhorando a saúde das plantas.</p>
+          </div>
+        </div>
+        <div class="tip-card">
+          <img src="images/divulgacao.jpg" alt="Pessoa usando celular para divulgar produtos">
+          <div class="tip-card-content">
+            <h4>Divulgação Digital</h4>
+            <p>Use redes sociais para mostrar seus produtos, contar sua história e criar um canal de venda direta.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="weather" class="page" aria-label="Previsão do Tempo">
+      <h2>Previsão do Tempo</h2>
+      <input type="text" id="city" placeholder="Digite a cidade" aria-label="Digite o nome da cidade" />
+      <button class="btn btn-outline" id="btn-weather">Ver Previsão</button>
+      <div class="weather-result" id="weather-result" role="region" aria-live="polite"></div>
+    </section>
+
+    <section id="events" class="page" aria-label="Feiras e Eventos Locais">
+        <h2>Feiras e Eventos Locais</h2>
+        <div class="events-grid">
+            <div class="event-card" role="article" tabindex="0">
+                <h3>Feira Orgânica de Santa Maria</h3>
+                <p>Data: 21/06/2025</p>
+                <img src="images/feira-organica.jpg" alt="Banca de uma feira orgânica com vegetais frescos" />
+            </div>
+            <div class="event-card" role="article" tabindex="0">
+                <h3>ExpoAgro Regional</h3>
+                <p>Data: 28/06/2025</p>
+                <img src="images/expo-agro.jpg" alt="Trator em um campo de plantação" />
+            </div>
+        </div>
+    </section>
+
+    <section id="notes" class="page" aria-label="Anotações e Notas">
+      <div class="notes-header">
+        <h2>Notas</h2>
+        <button id="notes-new-btn" class="btn-small" title="Nova Nota" aria-label="Criar nova nota">
+          <span class="material-icons">note_add</span> Nova Nota
+        </button>
+      </div>
+      <div class="notes-container" role="region" aria-live="polite" aria-label="Lista de notas e editor de notas">
+        <aside class="notes-sidebar" aria-label="Lista de notas">
+          <input type="search" id="notes-search" class="notes-search" placeholder="Pesquisar notas..." aria-label="Pesquisar notas"/>
+          <div id="notes-list" role="listbox" tabindex="0"></div>
+        </aside>
+        <section class="notes-main" aria-label="Editor de nota">
+          <textarea id="note-editor" aria-multiline="true" placeholder="Comece a escrever sua nota aqui..."></textarea>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

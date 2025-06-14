@@ -1,0 +1,436 @@
+/* --- GERAL E LAYOUT --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root {
+  --primary-color: #16a34a;
+  --primary-dark: #15803d;
+  --text-light: #f8fafc;
+  --text-dark: #065f46;
+  --bg-light: #f1f5f9;
+  --border-color: #cbd5e1;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  height: 100vh;
+  background-color: var(--bg-light);
+  color: #333;
+}
+
+main {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+h2 {
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+h3 {
+  color: var(--text-dark);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  border-bottom: 2px solid var(--bg-light);
+  padding-bottom: 0.5rem;
+}
+
+/* --- SIDEBAR DE NAVEGAÇÃO --- */
+.sidebar {
+  width: 250px;
+  background-color: #fff;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-right: 1px solid var(--border-color);
+}
+
+.sidebar h1 {
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.25rem;
+}
+
+.nav-btn {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: none;
+  background: transparent;
+  color: var(--text-dark);
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  background-color: var(--bg-light);
+}
+
+.nav-btn.active {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+}
+
+/* --- SEÇÕES DE PÁGINA --- */
+.page {
+  display: none;
+}
+.page.active {
+  display: block;
+}
+
+/* --- BOTÕES --- */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline:hover {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+}
+
+/* --- FORMULÁRIO --- */
+#product-form {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.full-row { width: 100%; }
+.half-row { display: flex; gap: 1.5rem; width: 100%; }
+.half-row > div { flex: 1; }
+
+#product-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #555;
+}
+
+#product-form input,
+#product-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1.5px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+}
+
+#product-form input:focus,
+#product-form textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+#image-preview img {
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+/* --- GRIDS (Produtos e Eventos) --- */
+.products-grid, .events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.product-card, .event-card {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.product-card h4, .event-card h3 {
+  color: var(--text-dark);
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.product-card p, .event-card p {
+  margin-bottom: 0.25rem;
+  color: #444;
+}
+
+.product-card img, .event-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 1rem;
+}
+
+/* --- SEÇÃO DICAS --- */
+.tips-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+.tip-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.tip-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+.tip-card-content {
+  padding: 1.5rem;
+}
+.tip-card-content h4 {
+  color: var(--text-dark);
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+.tip-card-content p {
+  line-height: 1.6;
+  color: #444;
+}
+@media (min-width: 900px) {
+    .tip-card {
+        flex-direction: row;
+        align-items: center;
+    }
+    .tip-card img {
+        width: 300px;
+        height: 100%;
+    }
+}
+
+
+/* --- SEÇÃO CLIMA --- */
+#weather input {
+  padding: 0.75rem;
+  border: 1.5px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-right: 0.5rem;
+}
+
+.weather-result {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* --- SEÇÃO NOTAS --- */
+.notes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.notes-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: nowrap;
+}
+.notes-sidebar {
+  width: 260px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 1rem;
+  height: 60vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.note-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+.note-item.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+.note-item:hover:not(.active) {
+  background-color: var(--bg-light);
+}
+.btn-small {
+  background: var(--primary-color);
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem 0.8rem;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.875rem;
+  transition: background-color 0.3s ease;
+}
+.btn-small:hover {
+  background: var(--primary-dark);
+}
+.btn-delete-note {
+    background: transparent;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    padding: 2px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-delete-note:hover {
+    background-color: #fee2e2;
+}
+.note-item.active .btn-delete-note {
+    color: #fee2e2;
+}
+.note-item.active .btn-delete-note:hover {
+    background-color: #ef4444;
+    color: #fff;
+}
+
+.notes-search, #note-editor {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 12px;
+  border: 1.8px solid var(--border-color);
+  outline: none;
+  font-family: 'Inter', sans-serif;
+  color: #374151;
+}
+.notes-search:focus, #note-editor:focus {
+  border-color: var(--primary-color);
+}
+.notes-search { margin-bottom: 1rem; }
+.notes-main {
+  flex: 1;
+}
+textarea#note-editor {
+  height: calc(60vh - 2rem);
+  resize: vertical;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* --- ESTILOS PARA GERAÇÃO DE COMERCIAL --- */
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border-left-color: var(--primary-color);
+  margin-top: 1.5rem;
+  animation: spin 1s ease infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.result-box {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    white-space: pre-wrap;
+    line-height: 1.6;
+    color: #333;
+}
+
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 900px) {
+  body {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .sidebar h1 {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .nav-btn {
+    flex-grow: 1;
+    text-align: center;
+  }
+  .notes-container {
+    flex-direction: column;
+    height: auto;
+  }
+  .notes-sidebar, .notes-main {
+    width: 100%;
+    height: auto;
+  }
+  .notes-sidebar { height: 250px; }
+}
+
+@media (max-width: 600px) {
+    .half-row {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    main {
+        padding: 1rem;
+    }
+    h2 {
+        font-size: 1.5rem;
+    }
+}
